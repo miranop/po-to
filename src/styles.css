@@ -1,0 +1,271 @@
+/* 98.css の上に重ねる、ポートフォリオ独自のレイアウト */
+
+:root {
+  --taskbar-h: 36px;
+  --teal: #008080;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: 'ms_sans_serif', 'MS Sans Serif', sans-serif;
+  overflow: hidden;
+}
+
+.app-root {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* ===== デスクトップ ===== */
+.desktop {
+  position: absolute;
+  inset: 0 0 var(--taskbar-h) 0;
+  /* Win98 のおなじみティール背景 */
+  background: var(--teal);
+  overflow: hidden;
+}
+
+.desktop-icons {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 4px;
+  padding: 12px;
+  height: 100%;
+}
+
+.desktop-icon {
+  width: 92px;
+  min-height: 84px;
+  background: transparent;
+  border: 1px dotted transparent;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 4px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.desktop-icon:active,
+.desktop-icon:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.desktop-icon.selected {
+  border: 1px dotted #fff;
+  background: rgba(0, 0, 130, 0.4);
+}
+
+.desktop-icon-glyph {
+  font-size: 34px;
+  line-height: 1;
+  filter: drop-shadow(1px 1px 0 rgba(0, 0, 0, 0.4));
+}
+
+.desktop-icon-label {
+  font-size: 12px;
+  text-align: center;
+  color: #fff;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.6);
+  line-height: 1.2;
+}
+
+.desktop-icon.selected .desktop-icon-label {
+  background: var(--teal);
+  outline: 1px dotted #fff;
+}
+
+/* ===== ウィンドウ ===== */
+.win98-window {
+  min-width: 200px;
+  max-width: 92vw;
+}
+
+.win98-window .window-body {
+  max-height: 60vh;
+  overflow: auto;
+}
+
+.title-bar {
+  cursor: grab;
+  user-select: none;
+}
+
+.title-bar:active {
+  cursor: grabbing;
+}
+
+.title-bar-icon {
+  font-size: 12px;
+}
+
+.win98-window fieldset {
+  margin-bottom: 10px;
+}
+
+.win98-window p {
+  line-height: 1.5;
+}
+
+/* ===== タスクバー ===== */
+.taskbar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--taskbar-h);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 4px;
+  background: silver;
+  border-top: 2px solid #fff;
+  box-shadow: inset 0 1px 0 #dfdfdf;
+  z-index: 100000;
+}
+
+.taskbar-start {
+  position: relative;
+}
+
+.taskbar-start-button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 28px;
+  padding: 0 8px;
+  font-weight: bold;
+}
+
+.taskbar-start-button.active {
+  /* 押し込まれた表現 */
+  box-shadow: inset -1px -1px 0 #fff, inset 1px 1px 0 grey,
+    inset -2px -2px 0 #dfdfdf, inset 2px 2px 0 #0a0a0a;
+}
+
+.start-flag {
+  font-size: 16px;
+}
+
+.taskbar-divider {
+  width: 2px;
+  align-self: stretch;
+  margin: 2px;
+  border-left: 1px solid grey;
+  border-right: 1px solid #fff;
+}
+
+.taskbar-tasks {
+  flex: 1;
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+}
+
+.taskbar-task {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  min-width: 130px;
+  max-width: 180px;
+  padding: 0 8px;
+  text-align: left;
+  overflow: hidden;
+}
+
+.taskbar-task.active {
+  box-shadow: inset -1px -1px 0 #fff, inset 1px 1px 0 grey,
+    inset -2px -2px 0 #dfdfdf, inset 2px 2px 0 #0a0a0a;
+  font-weight: bold;
+}
+
+.taskbar-task-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.taskbar-tray {
+  height: 28px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  min-width: 64px;
+  justify-content: center;
+}
+
+/* ===== スタートメニュー ===== */
+.start-menu {
+  position: absolute;
+  bottom: calc(var(--taskbar-h) - 2px);
+  left: 0;
+  width: 240px;
+  display: flex;
+  padding: 3px;
+  z-index: 100001;
+}
+
+.start-menu-side {
+  width: 28px;
+  flex: 0 0 28px;
+  background: linear-gradient(to bottom, #000080, #1084d0);
+  color: #fff;
+  font-weight: bold;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  text-align: center;
+  padding: 8px 2px;
+  letter-spacing: 2px;
+}
+
+.start-menu-list {
+  flex: 1;
+  list-style: none;
+  margin: 0;
+  padding: 2px;
+}
+
+.start-menu-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.start-menu-list li:hover {
+  background: #000080;
+  color: #fff;
+}
+
+.start-menu-icon {
+  font-size: 18px;
+}
+
+/* スマホ表示の最低限の調整 */
+@media (max-width: 600px) {
+  .taskbar-task {
+    min-width: 44px;
+  }
+  .taskbar-task-label {
+    display: none;
+  }
+}
