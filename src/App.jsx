@@ -1,8 +1,9 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import Desktop from './components/Desktop.jsx'
 import Window from './components/Window.jsx'
 import Taskbar from './components/Taskbar.jsx'
 import { windows as windowDefs, aboutWindow } from './data/content.jsx'
+import { playStartupChime } from './sound.js'
 
 // 開けるウィンドウの一覧（デスクトップに並ぶもの＋スタートメニュー専用）
 const allDefs = [...windowDefs, aboutWindow]
@@ -12,6 +13,22 @@ export default function App() {
   // 現在開いているウィンドウの状態。id をキーに位置・重なり順・最小化を持つ
   const [openWins, setOpenWins] = useState([])
   const [topZ, setTopZ] = useState(10)
+
+  // ブラウザは「ページを開いた瞬間」の自動再生をブロックするため、
+  // 最初のユーザー操作（クリック／キー入力）のタイミングで一度だけ起動音を鳴らす。
+  useEffect(() => {
+    const onFirstInteraction = () => {
+      playStartupChime()
+      window.removeEventListener('pointerdown', onFirstInteraction)
+      window.removeEventListener('keydown', onFirstInteraction)
+    }
+    window.addEventListener('pointerdown', onFirstInteraction)
+    window.addEventListener('keydown', onFirstInteraction)
+    return () => {
+      window.removeEventListener('pointerdown', onFirstInteraction)
+      window.removeEventListener('keydown', onFirstInteraction)
+    }
+  }, [])
 
   const focusWindow = useCallback((id) => {
     setTopZ((z) => {
@@ -113,6 +130,7 @@ export default function App() {
         startItems={allDefs}
         onTaskClick={toggleFromTaskbar}
         onOpen={openWindow}
+        onPlayChime={playStartupChime}
       />
     </div>
   )

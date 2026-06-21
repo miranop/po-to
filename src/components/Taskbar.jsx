@@ -3,7 +3,14 @@ import startLogo from '../assets/icons/start.png'
 import volumeIcon from '../assets/icons/volume.png'
 
 // 画面下部のタスクバー。スタートボタン・起動中ウィンドウ・時計を表示。
-export default function Taskbar({ openWins, defById, startItems, onTaskClick, onOpen }) {
+export default function Taskbar({
+  openWins,
+  defById,
+  startItems,
+  onTaskClick,
+  onOpen,
+  onPlayChime,
+}) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [time, setTime] = useState(formatTime())
   const startRef = useRef(null)
@@ -79,7 +86,13 @@ export default function Taskbar({ openWins, defById, startItems, onTaskClick, on
       </div>
 
       <div className="taskbar-tray">
-        <img className="tray-icon" src={volumeIcon} alt="音量" title="音量" />
+        <button
+          className="tray-icon-button"
+          title="クリックで起動音を再生"
+          onClick={onPlayChime}
+        >
+          <img className="tray-icon" src={volumeIcon} alt="音量" draggable={false} />
+        </button>
         <span className="tray-clock" title={fullDate()}>
           {time}
         </span>

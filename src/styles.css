@@ -229,6 +229,25 @@ body {
     inset -2px -2px 0 #dfdfdf, inset 2px 2px 0 #0a0a0a;
 }
 
+/* トレイのスピーカーはクリックで起動音を再生。ボタンの装飾は消して画像だけ見せる */
+.tray-icon-button {
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.tray-icon-button:active,
+.tray-icon-button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
 .tray-icon {
   width: 16px;
   height: 16px;
