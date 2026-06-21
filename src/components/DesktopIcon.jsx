@@ -12,7 +12,7 @@ export default function DesktopIcon({ label, icon, onOpen }) {
       onDoubleClick={onOpen}
       onBlur={() => setSelected(false)}
     >
-      <span className="desktop-icon-glyph">{icon}</span>
+      <img className="desktop-icon-glyph" src={icon} alt="" draggable={false} />
       <span className="desktop-icon-label">{label}</span>
     </button>
   )

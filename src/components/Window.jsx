@@ -62,7 +62,8 @@ export default function Window({
     >
       <div className="title-bar" onMouseDown={onTitleMouseDown}>
         <div className="title-bar-text">
-          <span className="title-bar-icon">{icon}</span> {title}
+          <img className="title-bar-icon" src={icon} alt="" draggable={false} />
+          {title}
         </div>
         <div className="title-bar-controls">
           <button aria-label="Minimize" onClick={onMinimize}></button>

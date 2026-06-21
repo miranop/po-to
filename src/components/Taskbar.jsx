@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
+import startLogo from '../assets/icons/start.png'
+import volumeIcon from '../assets/icons/volume.png'
 
 // 画面下部のタスクバー。スタートボタン・起動中ウィンドウ・時計を表示。
 export default function Taskbar({ openWins, defById, startItems, onTaskClick, onOpen }) {
@@ -32,7 +34,7 @@ export default function Taskbar({ openWins, defById, startItems, onTaskClick, on
           className={`taskbar-start-button${menuOpen ? ' active' : ''}`}
           onClick={() => setMenuOpen((v) => !v)}
         >
-          <span className="start-flag">🪟</span>
+          <img className="start-flag" src={startLogo} alt="" draggable={false} />
           <strong>スタート</strong>
         </button>
 
@@ -48,7 +50,7 @@ export default function Taskbar({ openWins, defById, startItems, onTaskClick, on
                     setMenuOpen(false)
                   }}
                 >
-                  <span className="start-menu-icon">{item.icon}</span>
+                  <img className="start-menu-icon" src={item.icon} alt="" />
                   {item.title}
                 </li>
               ))}
@@ -69,14 +71,19 @@ export default function Taskbar({ openWins, defById, startItems, onTaskClick, on
               className={`taskbar-task${active ? ' active' : ''}`}
               onClick={() => onTaskClick(w.id)}
             >
-              <span className="taskbar-task-icon">{def.icon}</span>
+              <img className="taskbar-task-icon" src={def.icon} alt="" />
               <span className="taskbar-task-label">{def.title}</span>
             </button>
           )
         })}
       </div>
 
-      <div className="taskbar-tray status-bar-field">{time}</div>
+      <div className="taskbar-tray">
+        <img className="tray-icon" src={volumeIcon} alt="音量" title="音量" />
+        <span className="tray-clock" title={fullDate()}>
+          {time}
+        </span>
+      </div>
     </div>
   )
 }
@@ -85,5 +92,15 @@ function formatTime() {
   return new Date().toLocaleTimeString('ja-JP', {
     hour: '2-digit',
     minute: '2-digit',
+  })
+}
+
+// 時計ホバー時に表示する日付（Win98 同様）
+function fullDate() {
+  return new Date().toLocaleDateString('ja-JP', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    weekday: 'long',
   })
 }

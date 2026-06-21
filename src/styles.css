@@ -73,8 +73,10 @@ body {
 }
 
 .desktop-icon-glyph {
-  font-size: 34px;
-  line-height: 1;
+  width: 32px;
+  height: 32px;
+  /* Win98 のビットマップアイコンを拡大してもにじまないように */
+  image-rendering: pixelated;
   filter: drop-shadow(1px 1px 0 rgba(0, 0, 0, 0.4));
 }
 
@@ -112,7 +114,11 @@ body {
 }
 
 .title-bar-icon {
-  font-size: 12px;
+  width: 16px;
+  height: 16px;
+  image-rendering: pixelated;
+  vertical-align: middle;
+  margin-right: 2px;
 }
 
 .win98-window fieldset {
@@ -160,7 +166,9 @@ body {
 }
 
 .start-flag {
-  font-size: 16px;
+  width: 20px;
+  height: 20px;
+  image-rendering: pixelated;
 }
 
 .taskbar-divider {
@@ -202,13 +210,36 @@ body {
   white-space: nowrap;
 }
 
+.taskbar-task-icon {
+  width: 16px;
+  height: 16px;
+  image-rendering: pixelated;
+  flex: 0 0 16px;
+}
+
+/* システムトレイ（沈んだパネルにスピーカー＋時計） */
 .taskbar-tray {
   height: 28px;
   display: flex;
   align-items: center;
-  padding: 0 10px;
-  min-width: 64px;
-  justify-content: center;
+  gap: 8px;
+  padding: 0 8px;
+  /* 98.css の sunken panel と同じ凹みボーダー */
+  box-shadow: inset -1px -1px 0 #fff, inset 1px 1px 0 grey,
+    inset -2px -2px 0 #dfdfdf, inset 2px 2px 0 #0a0a0a;
+}
+
+.tray-icon {
+  width: 16px;
+  height: 16px;
+  image-rendering: pixelated;
+}
+
+.tray-clock {
+  font-size: 12px;
+  min-width: 42px;
+  text-align: center;
+  cursor: default;
 }
 
 /* ===== スタートメニュー ===== */
@@ -257,7 +288,9 @@ body {
 }
 
 .start-menu-icon {
-  font-size: 18px;
+  width: 24px;
+  height: 24px;
+  image-rendering: pixelated;
 }
 
 /* スマホ表示の最低限の調整 */

@@ -2,16 +2,21 @@
  * ここを編集すれば各ウィンドウの中身を差し替えられます。
  * id        : 内部識別子（重複させないこと）
  * title     : ウィンドウ／アイコンのタイトル
- * icon      : デスクトップアイコンの絵文字（好きな画像URLに変えてもOK）
+ * icon      : アイコン画像（src/assets/icons/ の本物の Win98 アイコン）
  * width     : ウィンドウの初期幅(px)
  * body      : ウィンドウ内に表示する JSX
  */
+
+import profileIcon from '../assets/icons/profile.png'
+import worksIcon from '../assets/icons/works.png'
+import futureIcon from '../assets/icons/future.png'
+import aboutIcon from '../assets/icons/about.png'
 
 export const windows = [
   {
     id: 'profile',
     title: 'プロフィール',
-    icon: '👤',
+    icon: profileIcon,
     width: 380,
     body: (
       <div>
@@ -45,7 +50,7 @@ export const windows = [
   {
     id: 'works',
     title: '実績',
-    icon: '🏆',
+    icon: worksIcon,
     width: 420,
     body: (
       <div>
@@ -79,7 +84,7 @@ export const windows = [
   {
     id: 'future',
     title: 'これからやりたいこと',
-    icon: '🚀',
+    icon: futureIcon,
     width: 380,
     body: (
       <div>
@@ -99,7 +104,7 @@ export const windows = [
 export const aboutWindow = {
   id: 'about',
   title: 'このサイトについて',
-  icon: 'ℹ️',
+  icon: aboutIcon,
   width: 340,
   body: (
     <div>
